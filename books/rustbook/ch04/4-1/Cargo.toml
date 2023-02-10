@@ -1,5 +1,6 @@
 [workspace]
 
 members = [
-    "samplecli-env"
+    "samplecli-env",
+    "samplecli-builder"
 ]
