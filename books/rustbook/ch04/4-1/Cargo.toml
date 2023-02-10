@@ -2,5 +2,6 @@
 
 members = [
     "samplecli-env",
-    "samplecli-builder"
+    "samplecli-builder",
+    "samplecli-derive"
 ]
