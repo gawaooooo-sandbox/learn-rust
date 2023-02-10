@@ -1,5 +1,5 @@
 [workspace]
 
 members = [
-    "samplecli-cmdline"
+    "samplecli-env"
 ]
