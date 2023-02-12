@@ -2,6 +2,19 @@ use clap::Parser;
 use std::fs::File;
 use std::io::{stdin, BufRead, BufReader};
 
+struct RpnCalculator(bool);
+
+impl RpnCalculator {
+    pub fn new(verbose: bool) -> Self {
+        Self(verbose)
+    }
+
+    pub fn eval(&self, formula: &str) -> i32 {
+        0
+    }
+}
+
+
 #[derive(Parser, Debug)]
 #[command(name = "My RPN program")]
 #[command(version = "1.0.0")]
@@ -39,8 +52,11 @@ fn main() {
 }
 
 fn run<R: BufRead>(reader: R, verbose: bool) {
+    let calc = RpnCalculator::new(verbose);
+
     for line in reader.lines() {
         let line = line.unwrap();
-        println!("{}", line);
+        let answer = calc.eval(&line);
+        println!("{}", answer);
     }
 }
