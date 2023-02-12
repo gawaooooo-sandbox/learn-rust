@@ -38,7 +38,7 @@ fn main() {
     }
 }
 
-fn run(reader: BufReader<File>, verbose: bool) {
+fn run<R: BufRead>(reader: R, verbose: bool) {
     for line in reader.lines() {
         let line = line.unwrap();
         println!("{}", line);
