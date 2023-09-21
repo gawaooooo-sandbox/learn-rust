@@ -38,7 +38,7 @@ pub fn generate_mandelbrot_set(
         for j in 0..canvas_w {
             let x = x_min + (x_max - x_min) * j as f64 / canvas_h_f64;
             let iter_index = get_n_diverged(x, y, max_iter);
-            let v = iter_index % 8 * 32; // 8色にｍ塗り分け
+            let v = iter_index % 8 * 32; // 8色に塗り分け
             data.push(v); // R
             data.push(v); // G
             data.push(v); // B
