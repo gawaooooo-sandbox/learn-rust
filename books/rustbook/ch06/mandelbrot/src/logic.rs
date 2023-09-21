@@ -9,7 +9,7 @@ fn get_n_diverged(x0: f64, y0: f64, max_iter: usize) -> u8 {
         xn = x_next;
         yn = y_next;
 
-        if yn * yn + xn * xn > 4.0 {
+        if xn * xn + yn * yn > 4.0 {
             return i as u8; // ｎ複素数ｎ絶対値が2をｈ超えるとｈｔ発散ｔｓ判定ｓ
         }
     }
@@ -36,7 +36,7 @@ pub fn generate_mandelbrot_set(
         let i_f64 = i as f64;
         let y = y_min + (y_max - y_min) * i_f64 / canvas_h_f64;
         for j in 0..canvas_w {
-            let x = x_min + (x_max - x_min) * j as f64 / canvas_h_f64;
+            let x = x_min + (x_max - x_min) * j as f64 / canvas_w_f64;
             let iter_index = get_n_diverged(x, y, max_iter);
             let v = iter_index % 8 * 32; // 8色に塗り分け
             data.push(v); // R
