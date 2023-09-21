@@ -62,9 +62,15 @@ Promise.all([mandelbrot]).then(async function ([
   console.log("finished loading wasm");
   const renderBtn = document.getElementById("render");
   renderBtn.addEventListener("click", () => {
-    draw_mandelbrot_set();
     let wasmResult = null;
+    let jsResult = null;
     {
+      console.log("wasm only");
+      draw_mandelbrot_set();
+    }
+
+    {
+      console.log("wasm + js");
       const CANVAS_ID = "canvas_hybrid";
       let canvas = document.getElementById(CANVAS_ID);
       let context = canvas.getContext("2d");
@@ -86,6 +92,37 @@ Promise.all([mandelbrot]).then(async function ([
       draw(context, canvasWidth, canvasHeight, wasmResult);
       const drawEndTime = Date.now();
       console.log(
+        `\tgenerate:wasm\tgenerate_elapsed:${
+          generateEndTime - generateStartTime
+        }[ms]`
+      );
+      console.log(
+        `\tdraw: js\tdraw_elapsed: ${drawEndTime - drawStartTime} [ms]`
+      );
+    }
+    {
+      console.log("js only");
+      const CANVAS_ID = "canvas_js";
+      let canvas = document.getElementById(CANVAS_ID);
+      let context = canvas.getContext("2d");
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+
+      const generateStartTime = Date.now();
+      jsResult = logic.generateMandelbrotSet(
+        canvasWidth,
+        canvasHeight,
+        X_MIN,
+        X_MAX,
+        Y_MIN,
+        Y_MAX,
+        MAX_ITER
+      );
+      const generateEndTime = Date.now();
+      const drawStartTime = Date.now();
+      draw(context, canvasWidth, canvasHeight, jsResult);
+      const drawEndTime = Date.now();
+      console.log(
         `\tgenerate:js\tgenerate_elapsed:${
           generateEndTime - generateStartTime
         }[ms]`
@@ -93,6 +130,19 @@ Promise.all([mandelbrot]).then(async function ([
       console.log(
         `\tdraw: js\tdraw_elapsed: ${drawEndTime - drawStartTime} [ms]`
       );
+    }
+
+    {
+      // 答えが等しいことを確認する
+      let isSame = true;
+      for (let i = 0; i < wasmResult.length; i++) {
+        if (wasmResult[i] !== jsResult[i]) {
+          console.log(i, wasmResult[i], jsResult[i]);
+          isSame = false;
+          break;
+        }
+      }
+      console.warn(`\n(wasmResult === jsResult):${isSame}`);
     }
   });
 });
