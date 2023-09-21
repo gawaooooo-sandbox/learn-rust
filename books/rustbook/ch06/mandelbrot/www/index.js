@@ -204,7 +204,7 @@ Promise.all([mandelbrot]).then(async function ([
     }
     const generateEndTime = Date.now();
     console.log(
-      `generate:wasm\tgenerate_elapsed:${
+      `generate: js\tgenerate_elapsed:${
         generateEndTime - generateStartTime
       }[ms]/${N}iter`
     );
