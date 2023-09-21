@@ -191,7 +191,7 @@ Promise.all([mandelbrot]).then(async function ([
     const generateStartTime = Date.now();
     for (let i = 0; i < N; i++) {
       const iterStartTime = Date.now();
-      jsResult = generateMandelbrotSet(
+      jsResult = logic.generateMandelbrotSet(
         canvasWidth,
         canvasHeight,
         X_MIN,
