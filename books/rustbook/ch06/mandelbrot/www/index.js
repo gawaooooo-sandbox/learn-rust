@@ -1,3 +1,45 @@
+// マンデルブロ集合を計算する関数群
+const logic = {
+  getNDiverged: function (x0, y0, max_iter) {
+    let xn = 0.0;
+    let yn = 0.0;
+    for (let i = 0; i < max_iter; i++) {
+      let x_next = xn * xn - yn * yn + x0;
+      let y_next = 2.0 * xn * yn + y0;
+      xn = x_next;
+      yn = y_next;
+      if (xn * xn + yn * yn > 4.0) {
+        return i;
+      }
+    }
+    return max_iter;
+  },
+  generateMandelbrotSet: function (
+    canvas_w,
+    canvas_h,
+    x_min,
+    x_max,
+    y_min,
+    y_max,
+    max_iter
+  ) {
+    let data = [];
+    for (let i = 0; i < canvas_h; i++) {
+      let y = y_min + ((y_max - y_min) * i) / canvas_h;
+      for (let j = 0; j < canvas_w; j++) {
+        let x = x_min + ((x_max - x_min) * j) / canvas_w;
+        let iter_index = this.getNDiverged(x, y, max_iter);
+        let v = (iter_index % 8) * 32;
+        data.push(v); // R
+        data.push(v); // G
+        data.push(v); // B
+        data.push(255); // A
+      }
+    }
+    return data;
+  },
+};
+
 // 配列を描画する関数
 function draw(ctx, canvas_w, canvas_h, data) {
   let img = new ImageData(new Uint8ClampedArray(data), canvas_w, canvas_h);
@@ -43,7 +85,6 @@ Promise.all([mandelbrot]).then(async function ([
       const drawStartTime = Date.now();
       draw(context, canvasWidth, canvasHeight, wasmResult);
       const drawEndTime = Date.now();
-      const elapsed = generateEndTime - generateStartTime;
       console.log(
         `\tgenerate:js\tgenerate_elapsed:${
           generateEndTime - generateStartTime
