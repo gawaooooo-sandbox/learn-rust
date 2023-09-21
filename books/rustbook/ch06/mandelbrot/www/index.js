@@ -145,4 +145,69 @@ Promise.all([mandelbrot]).then(async function ([
       console.warn(`\n(wasmResult === jsResult):${isSame}`);
     }
   });
+
+  // js実行速度計測用の実装
+  const N = 1000;
+  let jsResult = null;
+  let wasmResult = null;
+  {
+    const CANVAS_ID = "canvas_hybrid";
+    let result = [];
+    let canvas = document.getElementById(CANVAS_ID);
+    let context = canvas.getContext("2d");
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+
+    const generateStartTime = Date.now();
+    for (let i = 0; i < N; i++) {
+      const iterStartTime = Date.now();
+      wasmResult = generate_mandelbrot_set(
+        canvasWidth,
+        canvasHeight,
+        X_MIN,
+        X_MAX,
+        Y_MIN,
+        Y_MAX,
+        MAX_ITER
+      );
+      result.push(Date.now() - iterStartTime);
+    }
+    const generateEndTime = Date.now();
+    console.log(
+      `generate:wasm\tgenerate_elapsed:${
+        generateEndTime - generateStartTime
+      }[ms]/${N}iter`
+    );
+    console.log(JSON.stringify(result));
+  }
+  {
+    const CANVAS_ID = "canvas_js";
+    let result = [];
+    let canvas = document.getElementById(CANVAS_ID);
+    let context = canvas.getContext("2d");
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+
+    const generateStartTime = Date.now();
+    for (let i = 0; i < N; i++) {
+      const iterStartTime = Date.now();
+      jsResult = generateMandelbrotSet(
+        canvasWidth,
+        canvasHeight,
+        X_MIN,
+        X_MAX,
+        Y_MIN,
+        Y_MAX,
+        MAX_ITER
+      );
+      result.push(Date.now() - iterStartTime);
+    }
+    const generateEndTime = Date.now();
+    console.log(
+      `generate:wasm\tgenerate_elapsed:${
+        generateEndTime - generateStartTime
+      }[ms]/${N}iter`
+    );
+    console.log(JSON.stringify(result));
+  }
 });
