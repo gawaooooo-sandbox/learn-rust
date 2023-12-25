@@ -63,4 +63,8 @@ path = "./examples/chapter_2_4_subcommands_derive_struct.rs"
 name = "chapter_2_5_default_derive"
 path = "./examples/chapter_2_5_default_derive.rs"
 
+[[example]]
+name = "chapter_3_1_enum_derive"
+path = "./examples/chapter_3_1_enum_derive.rs"
+
 
