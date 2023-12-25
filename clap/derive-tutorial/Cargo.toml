@@ -7,6 +7,27 @@ members = [
 
 [workspace.package]
 edition = "2021"
+rust-version = "1.74.1"
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "./examples/**/*",
+]
 
 [workspace.dependencies]
 clap = { version = "4.4.11", features = ["derive"] }
+
+[package]
+name = "clasp-derive-tutorial"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+include.workspace = true
+
+[dependencies]
+clap = { workspace =  true }
+
+[[example]]
+name = "chapter_2_1_positional"
+path = "./examples/chapter_2_1_positional.rs"
+
