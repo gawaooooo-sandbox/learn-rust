@@ -71,4 +71,8 @@ path = "./examples/chapter_3_1_enum_derive.rs"
 name = "chapter_3_2_parse_derive"
 path = "./examples/chapter_3_2_parse_derive.rs"
 
+[[example]]
+name = "chapter_3_2_validate_derive"
+path = "./examples/chapter_3_2_validate_derive.rs"
+
 
