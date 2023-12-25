@@ -31,3 +31,6 @@ clap = { workspace =  true }
 name = "chapter_2_1_positional"
 path = "./examples/chapter_2_1_positional.rs"
 
+[[example]]
+name = "chapter_2_1_positional_mult"
+path = "./examples/chapter_2_1_positional_mult.rs"
