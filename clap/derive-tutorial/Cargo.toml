@@ -43,3 +43,11 @@ path = "./examples/chapter_2_2_options_derive.rs"
 name = "chapter_2_2_options_mult"
 path = "./examples/chapter_2_2_options_mult.rs"
 
+[[example]]
+name = "chapter_2_3_flag_derive"
+path = "./examples/chapter_2_3_flag_derive.rs"
+
+[[example]]
+name = "chapter_2_3_flag_count"
+path = "./examples/chapter_2_3_flag_count.rs"
+
