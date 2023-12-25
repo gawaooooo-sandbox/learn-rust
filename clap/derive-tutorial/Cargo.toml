@@ -59,4 +59,8 @@ path = "./examples/chapter_2_4_subcommands_derive.rs"
 name = "chapter_2_4_subcommands_derive_struct"
 path = "./examples/chapter_2_4_subcommands_derive_struct.rs"
 
+[[example]]
+name = "chapter_2_5_default_derive"
+path = "./examples/chapter_2_5_default_derive.rs"
+
 
