@@ -39,3 +39,7 @@ path = "./examples/chapter_2_1_positional_mult.rs"
 name = "chapter_2_2_options_derive"
 path = "./examples/chapter_2_2_options_derive.rs"
 
+[[example]]
+name = "chapter_2_2_options_mult"
+path = "./examples/chapter_2_2_options_mult.rs"
+
