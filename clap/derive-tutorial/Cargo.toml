@@ -2,7 +2,7 @@
 [workspace]
 resolver = "2"
 members = [
-    "chapter_0","chapter_1"
+    "chapter_0","chapter_1", "chapter_1_2"
 ]
 
 [workspace.package]
