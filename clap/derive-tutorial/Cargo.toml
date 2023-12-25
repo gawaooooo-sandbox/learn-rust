@@ -1,0 +1,12 @@
+
+[workspace]
+resolver = "2"
+members = [
+    "chapter_0","chapter_1"
+]
+
+[workspace.package]
+edition = "2021"
+
+[workspace.dependencies]
+clap = { version = "4.4.11", features = ["derive"] }
