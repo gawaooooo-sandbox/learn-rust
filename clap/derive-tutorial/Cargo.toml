@@ -82,3 +82,7 @@ path = "./examples/chapter_3_3_relations_derive.rs"
 [[example]]
 name = "chapter_3_4_custom_derive"
 path = "./examples/chapter_3_4_custom_derive.rs"
+
+[[example]]
+name = "chapter_4_testing"
+path = "./examples/chapter_4_testing.rs"
