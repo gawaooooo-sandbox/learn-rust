@@ -51,3 +51,12 @@ path = "./examples/chapter_2_3_flag_derive.rs"
 name = "chapter_2_3_flag_count"
 path = "./examples/chapter_2_3_flag_count.rs"
 
+[[example]]
+name = "chapter_2_4_subcommands_derive"
+path = "./examples/chapter_2_4_subcommands_derive.rs"
+
+[[example]]
+name = "chapter_2_4_subcommands_derive_struct"
+path = "./examples/chapter_2_4_subcommands_derive_struct.rs"
+
+
