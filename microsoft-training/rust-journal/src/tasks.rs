@@ -81,7 +81,7 @@ pub fn list_tasks(journal_path: PathBuf) -> Result<()> {
     } else {
         let mut order: u32 = 1;
         for task in tasks {
-            println!("{} {}", order, task);
+            println!("{}: {}", order, task);
             order += 1;
         }
     }
