@@ -22,23 +22,23 @@ impl Task {
 }
 
 impl fmt::Display for Task {
-    fn fum(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let created_at = self.created_at.with_timezone(&Local).format("%F %H:%M");
         write!(f, "{:<50} [{}]", self.text, created_at)
     }
 }
 
-pub fn add_task(journal_path: PathBuf, task: Task) -> Result<{}> {
+pub fn add_task(journal_path: PathBuf, task: Task) -> Result<()> {
     // Open the file.
-    let mut file = OpenOptions::new()
+    let file = OpenOptions::new()
         .read(true)
         .write(true)
         .create(true)
         .open(journal_path)?;
 
-    let mut tasks = collect_tasks(&file);
+    let mut tasks = collect_tasks(&file)?;
     tasks.push(task);
-    serde_json::to_write(file, &tasks)?;
+    serde_json::to_writer(file, &tasks)?;
 
     Ok(())
 }
@@ -51,7 +51,7 @@ pub fn complete_task(journal_path: PathBuf, task_position: usize) -> Result<()> 
         .open(journal_path)?;
 
     // Consume the file's contents as a vector of tasks.
-    let tasks = collect_tasks(&file)?;
+    let mut tasks = collect_tasks(&file)?;
 
     // Try to remove the task.
     if task_position == 0 || task_position > tasks.len() {
@@ -64,7 +64,7 @@ pub fn complete_task(journal_path: PathBuf, task_position: usize) -> Result<()> 
 
     // Write the modified task list back into the file.
     file.set_len(0)?;
-    serde_json::to_write(file, &tasks)?;
+    serde_json::to_writer(file, &tasks)?;
     Ok(())
 }
 
